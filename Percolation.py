@@ -145,10 +145,10 @@ class PercolationStats:
                 
                 plt.show()
                 plt.pause(.1)
-            
+            self.percThreshold = np.append(self.percThreshold,self.percObj.numberOfOpenSites()/self.percObj.n**2)
             for i in range(0,self.n):
                 for j in range(0,self.n):
-                    if self.percObj.isFull(i,j):
+                    if self.percObj.isFull(i,j) and self.percObj.siteState[i,j]==1:
                         self.percObj.siteState[i,j] = 2
             
             
@@ -159,7 +159,7 @@ class PercolationStats:
             plt.show()    
             plt.pause(3) 
             plt.close()
-            self.percThreshold = np.append(self.percThreshold,self.percObj.numberOfOpenSites()/self.percObj.n**2)
+            
         
         self.sampleMean = mean(self.percThreshold)        
         self.std = np.std(self.percThreshold)
